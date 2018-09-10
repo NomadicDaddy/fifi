@@ -24,6 +24,7 @@ function Find-InFiles {
 	03/25/2017	lordbeazley		Added NameMatch.
 	08/14/2018	lordbeazley		Added MaxAge.
 	09/09/2018	lordbeazley		Converted to function/module.
+	09/10/2018	lordbeazley		Returning an object would be more helpful. Doh!
 #>
 [CmdletBinding(SupportsShouldProcess = $false, PositionalBinding = $false, ConfirmImpact = 'Low')]
 Param(
@@ -52,12 +53,14 @@ foreach ($Haystack in ($Haystacks -split ',')) {
 						Write-Host "+ "  -ForegroundColor 'Green' -NoNewLine
 						Write-Host ("{0,22}  " -f $_.LastWriteTime) -ForegroundColor 'Green' -NoNewLine
 						Write-Host $_.FullName -ForegroundColor 'Green'
-						$HeapArray += "($($_.LastWriteTime)) $($_.FullName)"
+#						$HeapArray += "($($_.LastWriteTime)) $($_.FullName)"
+						$HeapArray += $_
 					} elseif ($NameMatch -and $_.FullName -imatch $Needle) {
 						Write-Host "+ "  -ForegroundColor 'Yellow' -NoNewLine
 						Write-Host ("{0,22}  " -f $_.LastWriteTime) -ForegroundColor 'Yellow' -NoNewLine
 						Write-Host $_.FullName -ForegroundColor 'Yellow'
-						$HeapArray += "($($_.LastWriteTime)) $($_.FullName)"
+#						$HeapArray += "($($_.LastWriteTime)) $($_.FullName)"
+						$HeapArray += $_
 					} else {
 						Write-Host "+ "  -ForegroundColor 'Gray' -NoNewLine
 						Write-Host ("{0,22}  " -f $_.LastWriteTime) -ForegroundColor 'DarkGray' -NoNewLine
@@ -74,12 +77,14 @@ foreach ($Haystack in ($Haystacks -split ',')) {
 						Write-Host "+ "  -ForegroundColor 'Green' -NoNewLine
 						Write-Host ("{0,22}  " -f $_.LastWriteTime) -ForegroundColor 'DarkGray' -NoNewLine
 						Write-Host $_.FullName -ForegroundColor 'Green'
-						$HeapArray += "($($_.LastWriteTime)) $($_.FullName)"
+#						$HeapArray += "($($_.LastWriteTime)) $($_.FullName)"
+						$HeapArray += $_
 					} elseif ($NameMatch -and $_.FullName -imatch $Needle) {
 						Write-Host "+ "  -ForegroundColor 'Yellow' -NoNewLine
 						Write-Host ("{0,22}  " -f $_.LastWriteTime) -ForegroundColor 'DarkGray' -NoNewLine
 						Write-Host $_.FullName -ForegroundColor 'Yellow'
-						$HeapArray += "($($_.LastWriteTime)) $($_.FullName)"
+#						$HeapArray += "($($_.LastWriteTime)) $($_.FullName)"
+						$HeapArray += $_
 					} else {
 						Write-Host "+ "  -ForegroundColor 'Gray' -NoNewLine
 						Write-Host ("{0,22}  " -f $_.LastWriteTime) -ForegroundColor 'DarkGray' -NoNewLine
@@ -96,8 +101,12 @@ if ($NameMatch -eq $true) {
 	Write-Host ("`r`n{0} files containing '{1}':`r`n" -f $HeapArray.Count, $Needle) -ForegroundColor 'White'
 }
 
-$HeapArray | clip
-Write-Output $HeapArray
+foreach ($file in $HeapArray) {
+	Write-Host $file.FullName
+}
+
+return $HeapArray
+
 }
 
 Set-Alias -Name 'fifi' -Value 'Find-InFiles'
