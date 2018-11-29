@@ -24,10 +24,10 @@ GUID = '6cd73638-c3b6-44f4-b98f-0d47bc7962e3'
 Author = 'Phillip Beazley'
 
 # Company or vendor of this module
-CompanyName = 'adminware, llc'
+CompanyName = 'Phillip Beazley'
 
 # Copyright statement for this module
-Copyright = '(c) 2018 adminware, llc'
+Copyright = '(c) 2018 Phillip Beazley'
 
 # Description of the functionality provided by this module
 Description = 'Finds a string within files of a specific type within the given locations and/or files with names containing that string.'
