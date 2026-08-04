@@ -1,1 +1,5 @@
 /.gallery.publish.ps1
+
+# secret — an .env holds live credentials; never commit one
+.env
+.env.*
