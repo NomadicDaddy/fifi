@@ -3,3 +3,6 @@
 # secret — an .env holds live credentials; never commit one
 .env
 .env.*
+
+# Local aidd blueprints and runtime records are not published with this module.
+/.aidd/
