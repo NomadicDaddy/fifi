@@ -55,8 +55,8 @@ fifi -Needle 'error' -Haystacks 'C:\work\scripts\%,C:\work\logs\%' -FileTypes '*
 Collect matching objects without status output:
 
 ```powershell
-$matches = @(fifi -Needle 'waldo' -Quiet)
-$matches | Select-Object FullName, LastWriteTime
+$found = @(fifi -Needle 'waldo' -Quiet)
+$found | Select-Object FullName, LastWriteTime
 ```
 
 To search for regex punctuation literally, escape the input:
