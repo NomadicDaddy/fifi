@@ -1,4 +1,5 @@
 /.gallery.publish.ps1
+/AGENTS.md
 
 # secret — an .env holds live credentials; never commit one
 .env
